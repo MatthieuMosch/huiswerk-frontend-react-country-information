@@ -1,12 +1,4 @@
-figcaption {
+.header-figure {
     text-align: center;
     font-size: 3em;
-}
-
-.flag {
-    height: 2vw;
-}
-
-li {
-    list-style: none;
 }

@@ -2,6 +2,8 @@ import './App.css';
 import {useState} from "react";
 import axios from "axios";
 
+import CountryTile from "./components/countryTile/CountryTile.jsx";
+
 import worldmap from "./assets/world_map.png";
 
 function App() {
@@ -23,29 +25,25 @@ function App() {
     return (
         <>
             <header>
-                <figure>
+                <figure className="header-figure">
                     <img className="worldmap" src={worldmap} alt="worldmap"/>
                     <figcaption>World Regions</figcaption>
                 </figure>
             </header>
             <main>
-                <ul>
                     {!countryData.length ?
                         <button
-                            onClick={() => getCountryData("https://restcountries.com/v3.1/all?fields=name,flags,population")}>
+                            onClick={() => getCountryData("https://restcountries.com/v3.1/all?fields=name,flag,flags,population")}>
                             get data
                         </button> :
                         countryData.map((country) => (
-                            <li key={country.name.common}>
-                                <p>
-                                    <img className="flag" src={country.flags.png} alt={country.name.common}/>
-                                    {country.name.common}
-                                </p>
-                                Has a population of {country.population}
-                            </li>)
-                        )
+                            <CountryTile
+                                key={country.flag}
+                                name={country.name.common}
+                                flag={country.flags.png}
+                                population={country.population}/>
+                        ))
                     }
-                </ul>
             </main>
         </>
     )

@@ -22,13 +22,14 @@ function App() {
     return (
         <>
             <h1>Landen informatie</h1>
-            <button onClick={getCountryData}>get data</button>
             <ul>
-                {countryData.length > 0 && countryData.map((country) => (
-                    <li key={country.name.common}>
-                        {country.name.common}
-                    </li>
-                ))}
+                {countryData.length ?
+                    countryData.map((country) => (
+                        <li key={country.flag}>
+                            <img src={country.flags.png} alt={country.name.common}/> {country.capital}
+                        </li>)) :
+                    <button onClick={getCountryData}>get data</button>
+                }
             </ul>
         </>
     )

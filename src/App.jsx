@@ -36,7 +36,7 @@ function App() {
                             onClick={() => getCountryData("https://restcountries.com/v3.1/all?fields=name,flag,flags,population")}>
                             get data
                         </button> :
-                        countryData.map((country) => (
+                        countryData.sort((a, b) => a.population - b.population).map((country) => (
                             <CountryTile
                                 key={country.flag}
                                 name={country.name.common}

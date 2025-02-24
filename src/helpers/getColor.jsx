@@ -7,7 +7,10 @@ function getColor(region) {
         case "asia": return "red";
         case "europe": return "yellow";
         case "oceania": return "purple";
-        default: return "black";
+        case "antarctic": return "orange";
+        default:
+            console.error("Unsupported region: ", region);
+            return "black";
     }
 }
 

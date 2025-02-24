@@ -1,5 +1,15 @@
 .country-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border: 1px black solid;
+    padding-bottom: 10px;
+}
+
+.tile-figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .tile-flag {

@@ -33,7 +33,7 @@ function App() {
             <main>
                     {!countryData.length ?
                         <button
-                            onClick={() => getCountryData("https://restcountries.com/v3.1/all?fields=name,flag,flags,population")}>
+                            onClick={() => getCountryData("https://restcountries.com/v3.1/all?fields=name,flag,flags,population,region")}>
                             get data
                         </button> :
                         countryData.sort((a, b) => a.population - b.population).map((country) => (
@@ -41,7 +41,9 @@ function App() {
                                 key={country.flag}
                                 name={country.name.common}
                                 flag={country.flags.png}
-                                population={country.population}/>
+                                population={country.population}
+                                region={country.region}
+                            />
                         ))
                     }
             </main>

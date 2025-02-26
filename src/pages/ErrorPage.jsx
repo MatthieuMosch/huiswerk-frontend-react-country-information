@@ -1,4 +1,9 @@
+// page to show an error
+
+// import css
 import "./ErrorPage.css";
+
+// import components
 import NavBar from "../components/navBar/NavBar.jsx";
 
 function ErrorPage({setPage, children}) {

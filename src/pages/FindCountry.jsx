@@ -1,3 +1,5 @@
+// page to show info about a country
+
 // import libraries
 import {useState} from "react";
 import axios from "axios";
@@ -7,26 +9,31 @@ import "./FindCountry.css";
 
 // import components
 import NavBar from "../components/navBar/NavBar.jsx";
+import InfoTile from "../components/infoTile/InfoTile.jsx";
 
 //import images
 import globe from "../assets/spinning_globe.png";
 
 function FindCountry({setPage}) {
+    const [error, toggleError] = useState(false);
     const [name, setName] = useState("");
-    const [details, setDetails] = useState([]);
+    const [details, setDetails] = useState(null);
+
     async function getCountry(e) {
         e.preventDefault();
         try {
-            const uri = "https://restcountries.com/v3.1/name/netherlands?fullText=true"
-            // const uri = "https://restcountries.com/v3.1/name/aruba?fullText=true"
+            toggleError(false);
+            setDetails(null);
+            const uri = `https://restcountries.com/v3.1/name/${name}?fullText=true`;
             const newDetails = await axios.get(uri);
-            console.log("newDetails", newDetails);
             setDetails(newDetails.data);
+            setName(""); //this could go in finally{} but I like the field to keep its text after an error so the user can edit it
         } catch (err) {
-            console.error("foutje: " + err.message);
-        } finally {
+            toggleError(true);
+            console.error("Error: " + err.message);
         }
     }
+
     return (
         <>
             <header>
@@ -37,32 +44,22 @@ function FindCountry({setPage}) {
                 </figure>
             </header>
             <main>
-                <form onSubmit={getCountry}>
+                <form className="form-country" onSubmit={getCountry}>
                     <input
                         type="text"
+                        className="input-country"
+                        placeholder="Enter the name of a country"
                         value={name}
-                        onChange={(e)=>setName(e.target.value)}
+                        onChange={(e)=>{
+                            toggleError(false);
+                            setName(e.target.value)}}
                     />
-                    <button type="submit">Find Country</button>
+                    <button type="submit" className="button-country">Find Country</button>
                 </form>
-                {details.length ?
-                    <section>
-                        <img src={details[0].flags.png}/>
-                        <p>{details[0].name.common}</p>
-                        <p>{details[0].subregion}</p>
-                        <p>{details[0].capital}</p>
-                        <p>{details[0].population}</p>
-                        {details[0].borders ? <p>{details[0].borders.length}</p> : <p>geen buren</p>}
-                        <p>{details[0].tld}</p>
-                    </section> :
-                    <section>
-                        <p>lang niet gevonden</p>
-                    </section>
+                {error ?
+                    <section>{name} bestaat niet. Probeer het opnieuw</section> :
+                    details && <InfoTile info={details[0]}></InfoTile>
                 }
-                [IMAGE: flag] [country-name]
-                [country-naam] is situated in [subarea-name] and the capital is [capital]
-                It has a population of [amount] million people and it borders with [amount] neighboring countries
-                Websites can be found on [domain] domain's
             </main>
         </>
     );

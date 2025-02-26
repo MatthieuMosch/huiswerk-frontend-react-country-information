@@ -1,3 +1,5 @@
+// page to show all countries, each in its own CountryTile
+
 // import libraries
 import {useState} from "react";
 import axios from "axios";
@@ -14,30 +16,33 @@ import worldmap from "../assets/world_map.png";
 
 function AllCountries({setPage}) {
     const [countries, setCountries] = useState([])
+
     async function getCountries(uri) {
         try {
             const newCountries = await axios.get(uri)
             setCountries(newCountries.data);
         } catch (err) {
-            console.error("foutje: " + err.message);
-        } finally {
-
+            console.error("Error: " + err.message);
         }
     }
+
     return (
         <>
             <header>
                 <NavBar setPage={setPage}/>
                 <figure className="header-figure">
-                    <img className="worldmap" src={worldmap} alt="worldmap"/>
                     <figcaption>World Regions</figcaption>
+                    <img className="worldmap" src={worldmap} alt="worldmap"/>
                 </figure>
             </header>
             <main className="countries-main">
                 {!countries.length ?
                     <button
-                        onClick={() => getCountries("https://restcountries.com/v3.1/all?fields=name,flag,flags,population,region")}>
-                        get data
+                        type="button"
+                        className="button-list"
+                        onClick={() => getCountries(
+                            "https://restcountries.com/v3.1/all?fields=name,flag,flags,population,region")}>
+                        List all countries
                     </button> :
                     countries.sort((a, b) => a.population - b.population).map((country) => (
                         <CountryTile

@@ -5,6 +5,14 @@
     flex-wrap: wrap;
 }
 
+.worldmap {
+    width: 80%;
+}
+
+.button-list {
+    font-size: 1.5em;
+}
+
 .country-tile {
     flex-basis: 20%;
 }

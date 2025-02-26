@@ -7,9 +7,7 @@ import FindCountry from "./pages/FindCountry.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 
 function App() {
-
-    const [page, setPage] = useState(2);
-
+    const [page, setPage] = useState(0);
     switch (page) {
         case 0:
             return(<NavPage page={page} setPage={setPage}/>)

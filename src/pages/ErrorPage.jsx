@@ -5,7 +5,7 @@ function ErrorPage({setPage, children}) {
     return (
         <>
             <NavBar setPage={setPage}></NavBar>
-            <h1 className="error-message">{children}</h1>
+            <h1 className="error-msg">{children}</h1>
         </>
     );
 }

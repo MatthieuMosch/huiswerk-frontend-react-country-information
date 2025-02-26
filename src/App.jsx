@@ -8,7 +8,7 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 
 function App() {
 
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(2);
 
     switch (page) {
         case 0:
